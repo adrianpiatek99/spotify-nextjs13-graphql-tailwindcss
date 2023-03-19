@@ -1,4 +1,4 @@
-import type {Ref, SVGProps } from "react";
+import type { Ref, SVGProps } from "react";
 import * as React from "react";
 import { forwardRef } from "react";
 
