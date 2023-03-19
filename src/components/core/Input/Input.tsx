@@ -45,7 +45,7 @@ export const Input: FC<InputProps> = forwardRef(
     const inputType = isPasswordVisible ? "text" : type;
 
     return (
-      <div className="flex flex-col gap-2 min-w-[50px]">
+      <div className="flex min-w-[50px] flex-col gap-2">
         <label className="font-semibold" htmlFor={label}>
           {label}
         </label>
@@ -71,7 +71,7 @@ export const Input: FC<InputProps> = forwardRef(
             ref={ref}
           />
           {isPasswordType && (
-            <div className="absolute flex gap-[4px] right-[10px] top-[50%] -translate-y-2/4">
+            <div className="absolute right-[10px] top-[50%] flex -translate-y-2/4 gap-[4px]">
               <IconButton
                 title={isPasswordVisible ? "Hide password" : "Show password"}
                 onClick={() => setIsPasswordVisible(prev => !prev)}
@@ -83,7 +83,7 @@ export const Input: FC<InputProps> = forwardRef(
         </div>
         {error && (
           <div className="flex items-center gap-1 px-[1px] text-error">
-            <WarningIcon className="w-[16px] h-[16px]" />
+            <WarningIcon className="h-[16px] w-[16px]" />
             <span>{error}</span>
           </div>
         )}

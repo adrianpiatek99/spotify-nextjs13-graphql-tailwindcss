@@ -20,7 +20,7 @@ const classes = {
 export const Checkbox: FC<CheckboxProps> = forwardRef(
   ({ checked, name, label, onValueChange = () => null, ...props }, ref: Ref<HTMLInputElement>) => {
     return (
-      <div className="flex items-center min-h-[19px]">
+      <div className="flex min-h-[19px] items-center">
         <input
           className={twMerge(
             `relative h-[16px] w-[16px] appearance-none rounded border-[1px] border-gray outline-none focus:transition-[border-color_0.2s] focus-visible:shadow-focus cursor-pointer duration-200 ${classes.hover} ${classes.checked}`
@@ -33,7 +33,7 @@ export const Checkbox: FC<CheckboxProps> = forwardRef(
           {...props}
           ref={ref}
         />
-        <label className="text-foreground px-[12px] cursor-pointer" htmlFor={name}>
+        <label className="cursor-pointer px-[12px] text-foreground" htmlFor={name}>
           <span>{label}</span>
         </label>
       </div>

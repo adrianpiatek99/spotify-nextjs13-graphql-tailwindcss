@@ -39,7 +39,7 @@ export const Select: FC<SelectProps> = ({
 }) => {
   return (
     <div className="relative flex flex-col">
-      <span className="font-semibold mb-[10px]">{label}</span>
+      <span className="mb-[10px] font-semibold">{label}</span>
       <Listbox value={selectedOption} onChange={e => e && onChange(e)}>
         <Listbox.Button
           className={twMerge(
@@ -49,7 +49,7 @@ export const Select: FC<SelectProps> = ({
           )}
         >
           {selectedOption ? selectedOption.name : label}
-          <ChevronIcon className="absolute fill-foreground w-[20px] h-[20px] top-[4px] right-[14px] translate-y-2/4" />
+          <ChevronIcon className="absolute top-[4px] right-[14px] h-[20px] w-[20px] translate-y-2/4 fill-foreground" />
         </Listbox.Button>
         <Transition
           enter="transition duration-100 ease-out"
@@ -59,7 +59,7 @@ export const Select: FC<SelectProps> = ({
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <Listbox.Options className="absolute bg-background2 w-full mt-1 py-1.5 max-h-60 overflow-auto rounded border-[1px] border-gray shadow-l focus:outline-none shadow-[0px_2px_10px_theme('colors.background1')]">
+          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded border-[1px] border-gray bg-background2 py-1.5 shadow-[0px_2px_10px_theme('colors.background1')] focus:outline-none">
             {options.map(option => (
               <Listbox.Option key={option.id} value={option} as={Fragment}>
                 {({ active, selected }) => (
