@@ -11,12 +11,13 @@
     "lint": "yarn run lint-ts",
     "format": "prettier --write .",
     "type-check": "tsc --pretty --noEmit",
-    "generate-icons": "rimraf \"./icons\" && svgr --config-file svgr-icons.config.js -d src/icons assets/icons && eslint --fix src/icons",
+    "generate-icons": "rimraf \"./icons\" && svgr --config-file svgr-icons.config.js -d src/icons assets/icons && eslint --fix src/icons && prettier --write src/icons",
     "generate-gql": "graphql-codegen && eslint --fix src/graphql/graphql.ts && prettier --write src/graphql/graphql.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.5.0",
     "@as-integrations/next": "^1.2.0",
+    "@headlessui/react": "^1.7.13",
     "@prisma/client": "^4.11.0",
     "@tanstack/react-query": "^4.27.0",
     "class-validator": "^0.14.0",
