@@ -19,7 +19,12 @@ export type Scalars = {
 
 export type Query = {
   __typename?: "Query";
+  userByUsername?: Maybe<UserEntity>;
   users: Array<UserEntity>;
+};
+
+export type QueryUserByUsernameArgs = {
+  username: Scalars["String"];
 };
 
 export type UserEntity = {
@@ -30,6 +35,21 @@ export type UserEntity = {
   role: Scalars["String"];
   updatedAt: Scalars["DateTime"];
   username: Scalars["String"];
+};
+
+export type GetUserByUsernameQueryVariables = Exact<{
+  username: Scalars["String"];
+}>;
+
+export type GetUserByUsernameQuery = {
+  __typename?: "Query";
+  userByUsername?: {
+    __typename?: "UserEntity";
+    id: string;
+    username: string;
+    createdAt: Date;
+    updatedAt: Date;
+  } | null;
 };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -45,6 +65,16 @@ export type GetUsersQuery = {
   }>;
 };
 
+export const GetUserByUsernameDocument = gql`
+  query getUserByUsername($username: String!) {
+    userByUsername(username: $username) {
+      id
+      username
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const GetUsersDocument = gql`
   query getUsers {
     users {
@@ -66,6 +96,20 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    getUserByUsername(
+      variables: GetUserByUsernameQueryVariables,
+      requestHeaders?: Dom.RequestInit["headers"]
+    ): Promise<GetUserByUsernameQuery> {
+      return withWrapper(
+        wrappedRequestHeaders =>
+          client.request<GetUserByUsernameQuery>(GetUserByUsernameDocument, variables, {
+            ...requestHeaders,
+            ...wrappedRequestHeaders
+          }),
+        "getUserByUsername",
+        "query"
+      );
+    },
     getUsers(
       variables?: GetUsersQueryVariables,
       requestHeaders?: Dom.RequestInit["headers"]
