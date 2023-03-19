@@ -59,7 +59,7 @@ export const Select: FC<SelectProps> = ({
           leaveFrom="transform scale-100 opacity-100"
           leaveTo="transform scale-95 opacity-0"
         >
-          <Listbox.Options className="absolute bg-background2 w-full mt-1 py-1.5 max-h-60 overflow-auto rounded border-[1px] border-gray shadow-l focus:outline-none shadow-[0px_2px_10px_theme('colors.background')]">
+          <Listbox.Options className="absolute bg-background2 w-full mt-1 py-1.5 max-h-60 overflow-auto rounded border-[1px] border-gray shadow-l focus:outline-none shadow-[0px_2px_10px_theme('colors.background1')]">
             {options.map(option => (
               <Listbox.Option key={option.id} value={option} as={Fragment}>
                 {({ active, selected }) => (
