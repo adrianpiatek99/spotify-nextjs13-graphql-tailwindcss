@@ -10,7 +10,8 @@
     "lint-fix": "eslint --fix *.ts **/*.ts **/*.tsx",
     "lint": "yarn run lint-ts",
     "format": "prettier --write .",
-    "type-check": "tsc --pretty --noEmit"
+    "type-check": "tsc --pretty --noEmit",
+    "generate-gql": "graphql-codegen && eslint --fix src/graphql/graphql.ts && prettier --write src/graphql/graphql.ts"
   },
   "dependencies": {
     "@apollo/server": "^4.5.0",
