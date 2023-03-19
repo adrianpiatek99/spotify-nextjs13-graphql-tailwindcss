@@ -73,7 +73,6 @@ export const Input: FC<InputProps> = forwardRef(
           {isPasswordType && (
             <div className="absolute flex gap-[4px] right-[10px] top-[50%] -translate-y-2/4">
               <IconButton
-                disabled
                 title={isPasswordVisible ? "Hide password" : "Show password"}
                 onClick={() => setIsPasswordVisible(prev => !prev)}
               >
