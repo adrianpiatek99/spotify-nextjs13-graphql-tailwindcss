@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint-ts": "eslint *.ts **/*.ts **/*.tsx",
+    "lint-fix": "eslint --fix *.ts **/*.ts **/*.tsx",
+    "lint": "yarn run lint-ts",
+    "format": "prettier --write .",
+    "type-check": "tsc --pretty --noEmit"
   },
   "dependencies": {
     "next": "13.2.4",
