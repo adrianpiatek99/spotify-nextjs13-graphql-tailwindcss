@@ -1,4 +1,4 @@
-import type {Ref, SVGProps } from "react";
+import type { Ref, SVGProps } from "react";
 import * as React from "react";
 import { forwardRef } from "react";
 
@@ -10,7 +10,6 @@ const SvgSpotifyIcon = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>)
     aria-hidden="false"
     height="1em"
     data-encore-id="logoSpotify"
-    className="spotify-icon_svg__Svg-sc-6c3c1v-0 spotify-icon_svg__fMEvxo"
     width="1em"
     ref={ref}
     {...props}

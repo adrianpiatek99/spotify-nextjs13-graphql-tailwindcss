@@ -10,14 +10,10 @@ button {
   @apply outline-none;
 }
 
-button:disabled {
-  @apply cursor-not-allowed opacity-50;
-}
-
 .link {
-  @apply outline-none underline hover:text-primary focus-visible:text-primary focus-visible:rounded focus-visible:shadow-focus active:text-primary-100 duration-100;
+  @apply outline-none underline hover:text-primary focus-visible:text-primary focus-visible:rounded focus-visible:shadow-focus active:brightness-65 duration-100;
 }
 
 .link--highlighted {
-  @apply outline-none underline text-primary hover:text-primary-300 active:text-primary-100 focus-visible:rounded focus-visible:shadow-focus duration-100;
+  @apply outline-none underline text-primary hover:brightness-80 active:brightness-65 focus-visible:rounded focus-visible:shadow-focus duration-100;
 }

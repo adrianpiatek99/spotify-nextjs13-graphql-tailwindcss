@@ -11,18 +11,7 @@ module.exports = {
     },
     colors: {
       current: "currentColor",
-      primary: {
-        50: "#86eeab",
-        100: "#70eb9c",
-        200: "#5ae88c",
-        300: "#43e57d",
-        400: "#2de26d",
-        DEFAULT: "#1ed760",
-        600: "#1bc156",
-        700: "#18aa4c",
-        800: "#159442",
-        900: "#127e38"
-      },
+      primary: "#1ed760",
       secondary: "#445A90",
       background1: "#111111",
       background2: "#000000",
@@ -52,11 +41,27 @@ module.exports = {
       primary: ["-apple-system", "BlinkMacSystemFont", "Inter", "Helvetica", "Arial", "sans-serif"]
     },
     extend: {
+      animation: {
+        "animation-spinner": "spinner 0.6s linear infinite"
+      },
+      keyframes: {
+        spinner: {
+          to: { transform: "rotate(360deg)" }
+        }
+      },
       opacity: {
         15: ".15"
       },
       boxShadow: {
-        focus: "0px 0px 0px 2px #ffffff"
+        focus: "0px 0px 0px 2px #ffffff95",
+        "focus-inset": "inset 0px 0px 0px 2px #ffffff95"
+      },
+      brightness: {
+        60: ".60",
+        65: ".65",
+        70: ".70",
+        80: ".80",
+        85: ".85"
       }
     }
   },
