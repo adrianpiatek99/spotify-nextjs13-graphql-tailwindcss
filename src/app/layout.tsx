@@ -2,6 +2,8 @@ import "./globals.css";
 
 import type { ReactNode } from "react";
 
+import RootProviders from "./RootProviders";
+
 export const metadata = {
   title: {
     default: "Spotify",
@@ -21,7 +23,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <RootProviders>{children}</RootProviders>
+      </body>
     </html>
   );
 }
