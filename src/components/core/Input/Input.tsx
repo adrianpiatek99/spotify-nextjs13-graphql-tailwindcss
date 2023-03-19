@@ -4,6 +4,7 @@ import React, { forwardRef, useState } from "react";
 import { EyeIcon, EyeInvisibleIcon, WarningIcon } from "@/icons";
 import { twMerge } from "tailwind-merge";
 
+import { IconButton } from "../IconButton";
 import type { InputType } from "./Input.type";
 
 interface InputProps extends Omit<ComponentPropsWithRef<"input">, "type" | "size"> {
@@ -70,10 +71,14 @@ export const Input: FC<InputProps> = forwardRef(
             ref={ref}
           />
           {isPasswordType && (
-            <div className="absolute flex gap-[4px] right-[20px] top-[50%] -translate-y-2/4">
-              <div onClick={() => setIsPasswordVisible(prev => !prev)}>
+            <div className="absolute flex gap-[4px] right-[10px] top-[50%] -translate-y-2/4">
+              <IconButton
+                disabled
+                title={isPasswordVisible ? "Hide password" : "Show password"}
+                onClick={() => setIsPasswordVisible(prev => !prev)}
+              >
                 {isPasswordVisible ? <EyeInvisibleIcon /> : <EyeIcon />}
-              </div>
+              </IconButton>
             </div>
           )}
         </div>
