@@ -38,8 +38,8 @@ export const Select: FC<SelectProps> = ({
   error = false
 }) => {
   return (
-    <div className="relative flex flex-col">
-      <span className="mb-[10px] font-semibold">{label}</span>
+    <div className="relative z-10 flex flex-col">
+      <span className="mb-2 font-semibold">{label}</span>
       <Listbox value={selectedOption} onChange={e => e && onChange(e)}>
         <Listbox.Button
           className={twMerge(
