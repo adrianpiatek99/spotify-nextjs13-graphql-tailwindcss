@@ -1,19 +1,21 @@
 import type { ComponentPropsWithRef, FC, Ref } from "react";
 import React, { forwardRef, useState } from "react";
 
-import { EyeIcon, EyeInvisibleIcon, WarningIcon } from "@/icons";
+import { EyeIcon, EyeInvisibleIcon } from "@/icons";
 import { twMerge } from "tailwind-merge";
 
 import { IconButton } from "../IconButton";
 import type { InputType } from "./Input.type";
+import { InputErrorMessage } from "./InputErrorMessage";
 
 interface InputProps extends Omit<ComponentPropsWithRef<"input">, "type" | "size"> {
   name: string;
   label: string;
-  onValueChange?: (value: string) => void;
+  onValueChange?: (value: string | number) => void;
   disabled?: boolean;
   type?: InputType;
   error?: string;
+  hideErrorMessage?: boolean;
 }
 
 const inputClasses = {
@@ -36,6 +38,7 @@ export const Input: FC<InputProps> = forwardRef(
       onValueChange = () => null,
       maxLength = 255,
       className = "",
+      hideErrorMessage = false,
       ...props
     },
     ref: Ref<HTMLInputElement>
@@ -81,12 +84,7 @@ export const Input: FC<InputProps> = forwardRef(
             </div>
           )}
         </div>
-        {error && (
-          <div className="flex items-center gap-1 px-[1px] text-error">
-            <WarningIcon className="h-[16px] w-[16px]" />
-            <span>{error}</span>
-          </div>
-        )}
+        {!hideErrorMessage && <InputErrorMessage error={error} />}
       </div>
     );
   }

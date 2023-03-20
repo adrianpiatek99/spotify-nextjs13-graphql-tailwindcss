@@ -3,4 +3,5 @@ export * from "./Checkbox";
 export * from "./IconButton";
 export * from "./Input";
 export * from "./Loader";
+export * from "./Radio";
 export * from "./Select";

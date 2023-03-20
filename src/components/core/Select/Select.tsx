@@ -13,7 +13,7 @@ interface SelectProps {
   selectedOption: SelectOption | null;
   options: SelectOption[];
   onChange: (option: SelectOption) => void;
-  error?: boolean;
+  isError?: boolean;
 }
 
 const buttonClasses = {
@@ -35,17 +35,17 @@ export const Select: FC<SelectProps> = ({
   selectedOption,
   options,
   onChange,
-  error = false
+  isError = false
 }) => {
   return (
-    <div className="relative flex flex-col">
-      <span className="mb-[10px] font-semibold">{label}</span>
+    <div className="relative z-10 flex flex-col">
+      <span className="mb-2 font-semibold">{label}</span>
       <Listbox value={selectedOption} onChange={e => e && onChange(e)}>
         <Listbox.Button
           className={twMerge(
             `relative bg-background2 w-full cursor-pointer rounded px-[14px] py-[15.5px] pr-[50px] text-left shadow-[inset_0px_0px_0px_1px_theme('colors.gray.DEFAULT')] duration-200 ${
               !selectedOption && "text-gray-200"
-            } ${buttonClasses.hover} ${buttonClasses.focus} ${error && buttonClasses.error}`
+            } ${buttonClasses.hover} ${buttonClasses.focus} ${isError && buttonClasses.error}`
           )}
         >
           {selectedOption ? selectedOption.name : label}

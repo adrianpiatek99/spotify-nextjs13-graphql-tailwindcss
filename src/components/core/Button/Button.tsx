@@ -57,7 +57,7 @@ export const Button: FC<ButtonProps> = forwardRef(
         {startIcon && !loading && startIcon}
         {loading && (
           <div className="absolute top-2/4 left-1/2 -translate-x-2/4 -translate-y-2/4">
-            <Loader className="" />
+            <Loader />
           </div>
         )}
         <span className={`${loading && "invisible"}`}>{children}</span>

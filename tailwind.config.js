@@ -53,8 +53,8 @@ module.exports = {
         15: ".15"
       },
       boxShadow: {
-        focus: "0px 0px 0px 2px #ffffff95",
-        "focus-inset": "inset 0px 0px 0px 2px #ffffff95"
+        focus: "0px 0px 0px 2px #ffffff",
+        "focus-inset": "inset 0px 0px 0px 2px #ffffff"
       },
       brightness: {
         60: ".60",

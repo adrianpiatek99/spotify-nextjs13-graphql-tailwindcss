@@ -2,7 +2,7 @@ import type { User } from "@prisma/client";
 import { Field, ID, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class UserEntity implements Omit<User, "password" | "role"> {
+export class UserEntity implements Omit<User, "password" | "role" | "gender"> {
   @Field(() => ID)
   id!: string;
 
@@ -14,6 +14,12 @@ export class UserEntity implements Omit<User, "password" | "role"> {
 
   @Field()
   role!: string;
+
+  @Field()
+  gender!: string;
+
+  @Field()
+  birthday!: Date;
 
   @Field()
   createdAt!: Date;
