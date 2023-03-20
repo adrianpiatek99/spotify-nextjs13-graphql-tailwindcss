@@ -44,12 +44,22 @@ enum Role {
   USER
 }
 
+enum Gender {
+  MALE
+  FEMALE
+  NONBINARY
+  OTHER
+  PREFERNOTTOSAY
+}
+
 model User {
   id        String    @id @default(cuid())
   username  String    @unique
   email     String    @unique
   password  String
   role      Role      @default(USER)
+  gender    Gender    @default(PREFERNOTTOSAY)
+  birthday  DateTime
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   accounts  Account[]
