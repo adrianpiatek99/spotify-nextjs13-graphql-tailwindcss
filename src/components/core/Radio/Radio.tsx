@@ -10,23 +10,27 @@ export interface RadioProps extends Omit<ComponentPropsWithRef<"input">, "type" 
   name: string;
   label: string;
   onValueChange?: (value: string) => void;
+  isError?: boolean;
 }
 
 const classes = {
   hover: "enabled:hover:border-primary enabled:checked:hover:border-primary/75",
-  checked: "checked:border-[3px] checked:border-primary"
+  checked: "checked:border-[3px] checked:border-primary",
+  error: "border-error"
 };
 
 export const Radio: FC<RadioProps> = forwardRef(
   (
-    { value, name, label, checked, onValueChange = () => null, ...props },
+    { value, name, label, checked, onValueChange = () => null, isError = false, ...props },
     ref: Ref<HTMLInputElement>
   ) => {
     return (
       <div className="flex min-h-[19px] items-center">
         <input
           className={twMerge(
-            `relative h-[16px] w-[16px] appearance-none rounded-full bg-background2 border-[1px] border-gray outline-none cursor-pointer duration-150 focus-visible:shadow-focus ${classes.hover} ${classes.checked}`
+            `relative h-[16px] w-[16px] appearance-none rounded-full bg-background2 border-[1px] border-gray outline-none cursor-pointer duration-150 focus-visible:shadow-focus ${
+              isError && classes.error
+            } ${classes.hover} ${classes.checked}`
           )}
           type="radio"
           id={value}
