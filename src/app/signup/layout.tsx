@@ -1,8 +1,10 @@
 import type { ReactNode } from "react";
 
+import type { Metadata } from "next";
+
 const description = "Sign up";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Sign up",
   description,
   openGraph: {
