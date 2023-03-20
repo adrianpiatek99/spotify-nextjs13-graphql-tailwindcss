@@ -29,8 +29,10 @@ export type QueryUserByUsernameArgs = {
 
 export type UserEntity = {
   __typename?: "UserEntity";
+  birthday: Scalars["DateTime"];
   createdAt: Scalars["DateTime"];
   email: Scalars["String"];
+  gender: Scalars["String"];
   id: Scalars["ID"];
   role: Scalars["String"];
   updatedAt: Scalars["DateTime"];
@@ -47,6 +49,7 @@ export type GetUserByUsernameQuery = {
     __typename?: "UserEntity";
     id: string;
     username: string;
+    gender: string;
     createdAt: Date;
     updatedAt: Date;
   } | null;
@@ -60,6 +63,7 @@ export type GetUsersQuery = {
     __typename?: "UserEntity";
     id: string;
     username: string;
+    gender: string;
     createdAt: Date;
     updatedAt: Date;
   }>;
@@ -70,6 +74,7 @@ export const GetUserByUsernameDocument = gql`
     userByUsername(username: $username) {
       id
       username
+      gender
       createdAt
       updatedAt
     }
@@ -80,6 +85,7 @@ export const GetUsersDocument = gql`
     users {
       id
       username
+      gender
       createdAt
       updatedAt
     }
