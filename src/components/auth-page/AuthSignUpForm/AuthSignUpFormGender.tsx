@@ -3,18 +3,20 @@ import React from "react";
 
 import { InputErrorMessage, Radio } from "@/components/core";
 import { genderOptions } from "@/constants/genderOptions";
-import type { Gender } from "@prisma/client";
+import type { Gender } from "@/graphql/graphql";
 
 interface AuthSignUpFormGenderProps {
   selectedGender: Gender | null;
   handleSelectGender: (value: Gender) => void;
   isGenderError: boolean;
+  isLoading: boolean;
 }
 
 export const AuthSignUpFormGender: FC<AuthSignUpFormGenderProps> = ({
   selectedGender,
   handleSelectGender,
-  isGenderError
+  isGenderError,
+  isLoading
 }) => {
   return (
     <div className="flex flex-col gap-2.5">
@@ -28,6 +30,7 @@ export const AuthSignUpFormGender: FC<AuthSignUpFormGenderProps> = ({
             value={value}
             label={label}
             isError={isGenderError}
+            disabled={isLoading}
             onValueChange={value => handleSelectGender(value as Gender)}
           />
         ))}

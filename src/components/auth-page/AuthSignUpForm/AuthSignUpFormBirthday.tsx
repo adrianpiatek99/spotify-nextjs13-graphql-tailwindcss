@@ -16,6 +16,7 @@ interface AuthSignUpFormBirthdayProps {
   selectedMonth: SelectOption | null;
   handleSelectMonth: (option: SelectOption) => void;
   isMonthError: boolean;
+  isLoading: boolean;
 }
 
 export const AuthSignUpFormBirthday: FC<AuthSignUpFormBirthdayProps> = ({
@@ -25,7 +26,8 @@ export const AuthSignUpFormBirthday: FC<AuthSignUpFormBirthdayProps> = ({
   setValue,
   selectedMonth,
   handleSelectMonth,
-  isMonthError
+  isMonthError,
+  isLoading
 }) => {
   const dayErrorMessage = errors.day?.message;
   const yearErrorMessage = errors.year?.message;
@@ -51,6 +53,7 @@ export const AuthSignUpFormBirthday: FC<AuthSignUpFormBirthdayProps> = ({
           maxLength={2}
           min={1}
           max={maxDayInputValue}
+          disabled={isLoading}
           hideErrorMessage
           error={errors.day?.message}
           {...register("day")}
@@ -60,12 +63,14 @@ export const AuthSignUpFormBirthday: FC<AuthSignUpFormBirthdayProps> = ({
           selectedOption={selectedMonth}
           options={monthOptions}
           isError={isMonthError}
+          disabled={isLoading}
           onChange={handleSelectMonth}
         />
         <Input
           label="Year"
           maxLength={4}
           hideErrorMessage
+          disabled={isLoading}
           error={errors.year?.message}
           {...register("year")}
         />
