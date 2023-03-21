@@ -23,7 +23,7 @@ const inputClasses = {
   focus: "enabled:focus-visible:shadow-[inset_0px_0px_0px_2px_theme('colors.gray.200')]",
   error:
     "shadow-[inset_0px_0px_0px_1px_theme('colors.error')] enabled:hover:shadow-[inset_0px_0px_0px_1px_theme('colors.error')] enabled:focus-visible:shadow-[inset_0px_0px_0px_2px_theme('colors.error')]",
-  disabled: "disabled:opacity-50",
+  disabled: "disabled:opacity-50 disabled:cursor-not-allowed",
   placeholder: "placeholder:text-gray-200"
 };
 
