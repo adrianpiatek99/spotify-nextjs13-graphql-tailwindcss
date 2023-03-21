@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 
 import type { Metadata } from "next";
 
-const description = "Sign up";
+const description = "Login";
 
 export const metadata: Metadata = {
-  title: "Sign up",
+  title: "Login",
   description,
   openGraph: {
     title: "Sign up",
@@ -17,6 +17,6 @@ export const metadata: Metadata = {
   }
 };
 
-export default function SignUpLayout({ children }: { children: ReactNode }) {
+export default function LoginLayout({ children }: { children: ReactNode }) {
   return children;
 }
