@@ -1,0 +1,12 @@
+query me($email: String!) {
+  me(email: $email) {
+    id
+    username
+    email
+    dateOfBirth
+    role
+    gender
+    createdAt
+    updatedAt
+  }
+}
