@@ -1,29 +1,29 @@
 import { prisma } from "@/prisma/prisma";
 import { compare, hashSync } from "bcryptjs";
 import { GraphQLError } from "graphql";
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
-import { type MyContext } from "../types/MyContext";
 import { UserEntity } from "../users/users.type";
 import { SignInInput, SignUpInput } from "./auth.type";
 
 @Resolver()
 export class AuthResolver {
   @Mutation(() => UserEntity, { nullable: true })
-  async signUp(
-    @Arg("input") input: SignUpInput,
-    @Ctx() ctx: MyContext
-  ): Promise<UserEntity | null> {
+  async signUp(@Arg("input") input: SignUpInput): Promise<UserEntity | null> {
     const { username, email, password } = input;
-
-    console.log("ctx", ctx);
 
     const userExist = await prisma.user.findFirst({
       where: { OR: [{ email }, { username }] }
     });
 
     if (userExist) {
-      throw new GraphQLError("Account is already exist.");
+      if (userExist.email === email) {
+        throw new GraphQLError("Email is already taken.");
+      }
+
+      if (userExist.username === username) {
+        throw new GraphQLError("Username is already taken.");
+      }
     }
 
     const hashedPassword = hashSync(password, 12);
@@ -45,13 +45,13 @@ export class AuthResolver {
     });
 
     if (!user) {
-      throw new GraphQLError("Account does not exist.");
+      throw new GraphQLError("Incorrect email/username or password.");
     }
 
     const isPasswordMatch = await compare(password, user.password);
 
     if (!isPasswordMatch) {
-      throw new GraphQLError("Invalid credentials.");
+      throw new GraphQLError("Incorrect email/username or password.");
     }
 
     return user;
