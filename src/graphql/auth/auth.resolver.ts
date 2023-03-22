@@ -13,22 +13,22 @@ export class AuthResolver {
     const { username, email, password } = input;
 
     const userExist = await prisma.user.findFirst({
-      where: { OR: [{ email }, { username }] }
+      where: { OR: [{ email }, { username: { equals: username, mode: "insensitive" } }] }
     });
 
     if (userExist) {
-      if (userExist.email === email) {
+      if (userExist.email.toLowerCase() === email.toLowerCase()) {
         throw new GraphQLError("Email is already taken.");
       }
 
-      if (userExist.username === username) {
+      if (userExist.username.toLowerCase() === username.toLowerCase()) {
         throw new GraphQLError("Username is already taken.");
       }
     }
 
     const hashedPassword = hashSync(password, 12);
     const user = await prisma.user.create({
-      data: { ...input, password: hashedPassword }
+      data: { ...input, email: email.toLowerCase(), password: hashedPassword }
     });
 
     return user;
@@ -40,7 +40,10 @@ export class AuthResolver {
 
     const user = await prisma.user.findFirst({
       where: {
-        OR: [{ email: emailOrUsername }, { username: emailOrUsername }]
+        OR: [
+          { email: emailOrUsername },
+          { username: { equals: emailOrUsername, mode: "insensitive" } }
+        ]
       }
     });
 
