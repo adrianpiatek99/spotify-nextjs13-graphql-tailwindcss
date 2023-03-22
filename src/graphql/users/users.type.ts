@@ -1,8 +1,19 @@
 import type { User } from "@prisma/client";
-import { Field, ID, ObjectType } from "type-graphql";
+import { Gender, Role } from "@prisma/client";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
+
+registerEnumType(Gender, {
+  name: "Gender",
+  description: undefined
+});
+
+registerEnumType(Role, {
+  name: "Role",
+  description: undefined
+});
 
 @ObjectType()
-export class UserEntity implements Omit<User, "password" | "role" | "gender"> {
+export class UserEntity implements Omit<User, "password"> {
   @Field(() => ID)
   id!: string;
 
@@ -12,14 +23,14 @@ export class UserEntity implements Omit<User, "password" | "role" | "gender"> {
   @Field()
   email!: string;
 
-  @Field()
-  role!: string;
+  @Field(() => Role)
+  role!: Role;
+
+  @Field(() => Gender)
+  gender!: Gender;
 
   @Field()
-  gender!: string;
-
-  @Field()
-  birthday!: Date;
+  dateOfBirth!: Date;
 
   @Field()
   createdAt!: Date;

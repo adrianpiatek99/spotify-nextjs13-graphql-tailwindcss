@@ -3,7 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-const reducer = combineReducers({});
+import meSlice from "./slices/meSlice";
+
+const reducer = combineReducers({
+  me: meSlice
+});
 
 export const store = configureStore({ reducer });
 

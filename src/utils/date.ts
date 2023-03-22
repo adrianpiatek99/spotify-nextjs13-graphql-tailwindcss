@@ -15,3 +15,6 @@ export const daysInMonth = (m: number, y: number) => {
 export const isValidDate = (d: number, m: number, y: number) => {
   return m >= 0 && m < 12 && d > 0 && d <= daysInMonth(m, y);
 };
+
+export const createDate = (year: string | number, month: number, day: string | number) =>
+  new Date(Number(year), month - 1, Number(day));
