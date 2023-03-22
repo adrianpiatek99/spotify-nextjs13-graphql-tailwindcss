@@ -3,12 +3,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  "plugins": [
-    "@typescript-eslint",
-    "simple-import-sort",
-    "prettier",
-    "@tanstack/query"
-  ],
+  "plugins": ["@typescript-eslint", "simple-import-sort", "prettier", "@tanstack/query"],
   "extends": [
     "next/core-web-vitals",
     "eslint:recommended",
