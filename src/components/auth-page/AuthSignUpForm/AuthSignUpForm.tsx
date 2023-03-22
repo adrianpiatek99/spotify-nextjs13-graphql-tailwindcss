@@ -6,12 +6,16 @@ import type { InputType, SelectOption } from "@/components/core";
 import { Button, Input } from "@/components/core";
 import { signUp } from "@/graphql/api";
 import type { Gender } from "@/graphql/graphql";
+import { useSignIn } from "@/hooks/useSignIn";
 import type { SignUpValues } from "@/schema/authSchema";
 import { signUpSchema } from "@/schema/authSchema";
 import { createDate } from "@/utils/date";
+import { getReactQueryError } from "@/utils/error";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
+import { AuthErrorMessageBar } from "../AuthErrorMessageBar";
 import { AuthSignUpFormBirthday } from "./AuthSignUpFormBirthday";
 import { AuthSignUpFormGender } from "./AuthSignUpFormGender";
 
@@ -23,11 +27,13 @@ const inputs: { name: keyof SignUpValues; label: string; type?: InputType }[] = 
 ];
 
 export const AuthSignUpForm = () => {
+  const { replace } = useRouter();
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    getValues,
     formState: { errors }
   } = useForm<SignUpValues>({
     resolver: zodResolver(signUpSchema)
@@ -36,7 +42,27 @@ export const AuthSignUpForm = () => {
   const [isMonthError, setIsMonthError] = useState(false);
   const [selectedGender, setSelectedGender] = useState<Gender | null>(null);
   const [isGenderError, setIsGenderError] = useState(false);
-  const { mutate, isLoading } = useMutation({ mutationFn: signUp });
+  const { signIn, isLoading: signInLoading } = useSignIn({
+    onSuccess: () => replace("/")
+  });
+  const {
+    mutate,
+    isLoading: mutationLoading,
+    error
+  } = useMutation({
+    mutationFn: signUp,
+    onSuccess: async data => {
+      const password = getValues("password");
+
+      if (data.signUp) {
+        await signIn({
+          emailOrUsername: data.signUp.email,
+          password
+        });
+      }
+    }
+  });
+  const isLoading = signInLoading || mutationLoading;
 
   const onSubmit: SubmitHandler<SignUpValues> = async data => {
     if (isMonthError || isGenderError || !selectedGender || !selectedMonth) return;
@@ -74,6 +100,7 @@ export const AuthSignUpForm = () => {
           handleSubmit(onSubmit)(e);
         }}
       >
+        {!!error && <AuthErrorMessageBar error={getReactQueryError(error).message} />}
         {inputs.map(({ name, ...restProps }) => (
           <Input
             key={name}
