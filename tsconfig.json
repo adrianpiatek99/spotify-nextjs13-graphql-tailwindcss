@@ -23,6 +23,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
+      "@/api/*": ["./pages/api/*"],
       "@/prisma/*": ["./prisma/*"]
     }
   },
