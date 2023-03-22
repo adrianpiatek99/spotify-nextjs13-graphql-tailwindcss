@@ -7,10 +7,12 @@ import { useSignIn } from "@/hooks/useSignIn";
 import type { LogInValues } from "@/schema/authSchema";
 import { logInSchema } from "@/schema/authSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 import { AuthErrorMessageBar } from "../AuthErrorMessageBar";
 
 export const AuthLogInForm = () => {
+  const { replace } = useRouter();
   const {
     register,
     handleSubmit,
@@ -20,7 +22,12 @@ export const AuthLogInForm = () => {
     resolver: zodResolver(logInSchema)
   });
   const [checked, setChecked] = useState(true);
-  const { signIn, isLoading, error } = useSignIn({ onSuccess: () => reset() });
+  const { signIn, isLoading, error } = useSignIn({
+    onSuccess: () => {
+      reset();
+      replace("/");
+    }
+  });
 
   const onSubmit: SubmitHandler<LogInValues> = async data => {
     await signIn(data);
